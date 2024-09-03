@@ -15,7 +15,6 @@ downloadBtn.addEventListener('click', () => download());
 uploadBtn.addEventListener('click', () => upload());
 resetBtn.addEventListener('click', () => reset());
 
-
 function addToDo(){
     count++;
     let toDo = document.createElement('div');
@@ -85,11 +84,45 @@ function closeEditor(){
     editor.classList.add('hidden');
 }
 
+function getToDoList(){
+    return Array.from(document.getElementsByClassName('to-do'));
+}
+
+function convertElement(toDo){
+    const date = toDo.querySelector('.date').textContent;
+    const description = toDo.querySelector('.description').textContent;
+    const switchOn = toDo.querySelector('.switch').classList.contains('switch-on');
+    return {date: date, description:description, switchOn:switchOn};
+}
+
+function getConvertedToDOList(){
+    const toDoListDoc = getToDoList();
+    let toDoList = [];
+    for (let i = 0; i < toDoListDoc.length; i++){
+        const toDo = convertElement(toDoListDoc[i]);
+        toDoList.push(toDo);
+    }
+    return toDoList;
+}
+
+function download(){
+    const toDoList = getConvertedToDOList();
+    const json = JSON.stringify(toDoList);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const btn = document.createElement('button');
+    btn.setAttribute('download', "toDoList.json");
+    btn.href = url;
+    document.body.appendChild(btn);
+    btn.click();
+    document.body.removeChild(btn);
+}
+
 function reset(){
     count = 0;
     if (!editor.classList.contains('hidden')){
         editor.classList.add('hidden');
     }
-    const toDoList = Array.from(document.getElementsByClassName('to-do'));
+    const toDoList = getToDoList();
     toDoList.forEach(toDo => toDo.remove());
 }

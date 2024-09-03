@@ -33,16 +33,16 @@
 }
 
 #to-do-list {
-    min-height: 842px;
-    max-width: 595px;
     margin: 15px auto;
-    background-color: #dcdcdc;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     align-items: center;
 }
 
 #to-do-list__content {
+    width: 580px;
+    background-color: #dcdcdc;
+    padding: 0 10px 5px 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     align-items: center;
     gap: 5px;
 }
@@ -55,11 +55,10 @@
 
 #list {
     gap: 5px;
-    height: fit-content;
 }
 
 .to-do {
-    width: 550px;
+    width: 555px;
     padding: 5px 10px;
     border-radius: 10px;
     background: #ffffff;
@@ -73,6 +72,7 @@
 .date {
     font-family: "Poppins-Medium", sans-serif;
     font-size: 14px;
+    line-height: 0;
 }
 
 .top-bar__buttons {
@@ -117,15 +117,18 @@
     text-decoration: line-through;
 }
 
-.edit,
-.delete {
-    width: 18px;
-    height: 18px;
+.button-img {
     background-color: transparent;
     outline: none;
     border: 0;
     background-size: cover;
     cursor: pointer;
+}
+
+.edit,
+.delete {
+    width: 18px;
+    height: 18px;
 }
 
 .edit {
@@ -136,6 +139,15 @@
     background-image: url("../assets/png/remove.png");
 }
 
-#description {
+.description {
+    font-family: "Poppins-Regular", sans-serif;
+    font-size: 12px;
+    line-height: 12px;
+    padding-left: 8px;
+}
 
+#add {
+    width: 26px;
+    height: 26px;
+    background-image: url("../assets/png/add.png");
 }

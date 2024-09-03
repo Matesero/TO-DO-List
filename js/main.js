@@ -1,15 +1,20 @@
 let list = document.getElementById('list');
 const editor = document.getElementById('editor');
+const addBtn = document.getElementById('add');
 const saveBtn = document.getElementById('save');
 const closeBtn = document.getElementById('close');
 const downloadBtn = document.getElementById('download');
 const uploadBtn = document.getElementById('upload');
 const resetBtn = document.getElementById('reset');
-const addBtn = document.getElementById('add');
 
 let count = 0;
 addBtn.addEventListener('click', () => addToDo());
+saveBtn.addEventListener('click', () => {});
 closeBtn.addEventListener('click', () => closeEditor());
+downloadBtn.addEventListener('click', () => download());
+uploadBtn.addEventListener('click', () => upload());
+resetBtn.addEventListener('click', () => reset());
+
 
 function addToDo(){
     count++;
@@ -78,4 +83,13 @@ function deleteToDo(toDo){
 
 function closeEditor(){
     editor.classList.add('hidden');
+}
+
+function reset(){
+    count = 0;
+    if (!editor.classList.contains('hidden')){
+        editor.classList.add('hidden');
+    }
+    const toDoList = Array.from(document.getElementsByClassName('to-do'));
+    toDoList.forEach(toDo => toDo.remove());
 }

@@ -33,7 +33,7 @@
 }
 
 #editor {
-    width: 250px;
+    width: 200px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -42,8 +42,7 @@
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 10px 10px 5px 10px;
-    align-items: center;
-    gap: 15px;
+    gap: 10px;
     z-index: 1;
 }
 
@@ -60,16 +59,27 @@
     font-family: "Poppins-SemiBold", sans-serif;
     font-size: 12px;
     line-height: 0;
+    cursor: default;
 }
 
 #input-date,
 #input-description {
-
+    height: 20px;
+    width: 110px;
+    min-height: 20px;
+    font-size: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
 }
 
+#input-date {
+    width: 113px;
+    cursor: pointer;
+}
 
 #editor__buttons {
     gap: 5px;
+    margin: 0 auto;
 }
 
 #save,
@@ -87,13 +97,22 @@
     background-color: #de4a40;
 }
 
+#save:hover {
+    box-shadow: 0 0 5px rgba(40, 215, 121, 0.5);
+}
+
+#close:hover {
+    box-shadow: 0 0 5px rgba(222, 74, 64, 0.5);
+}
+
 .hidden {
-    opacity: 0;
+    display: none;
 }
 
 #to-do-list {
     margin: 15px auto;
     align-items: center;
+    gap: 10px;
 }
 
 #to-do-list__content {
@@ -110,10 +129,11 @@
     font-family: "Poppins-Bold", sans-serif;
     font-size: 25px;
     line-height: 0;
+    cursor: default;
 }
 
 #list {
-    gap: 5px;
+    gap: 7px;
 }
 
 .to-do {
@@ -121,6 +141,10 @@
     padding: 5px 10px;
     border-radius: 10px;
     background: #ffffff;
+}
+
+.to-do:hover {
+    box-shadow: 0 0 10px rgb(255, 255, 255);
 }
 
 .to-do__top-bar {
@@ -132,6 +156,7 @@
     font-family: "Poppins-Medium", sans-serif;
     font-size: 14px;
     line-height: 0;
+    cursor: default;
 }
 
 .top-bar__buttons {
@@ -176,6 +201,10 @@
     text-decoration: line-through;
 }
 
+.complete:hover {
+    box-shadow: 0 0 15px rgb(159, 255, 153);
+}
+
 .button-img {
     background-color: transparent;
     outline: none;
@@ -203,10 +232,38 @@
     font-size: 12px;
     line-height: 12px;
     padding-left: 8px;
+    cursor: default;
 }
 
 #add {
     width: 26px;
     height: 26px;
     background-image: url("../assets/png/add.png");
+}
+
+#bottom-bar {
+    gap: 10px;
+}
+
+#download,
+#upload,
+#reset {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 15px;
+    color: #FFFFFF;
+    background: #28d779;
+    border-radius: 10px;
+    padding: 1px 8px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 10px rgba(40, 215, 121, 0.65);
+}
+
+#download:hover,
+#upload:hover,
+#reset:hover {
+    box-shadow: 0 0 15px rgba(40, 215, 121, 100%);
 }

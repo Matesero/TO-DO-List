@@ -9,7 +9,10 @@ const hiddenUploadBtn = document.getElementById('hidden-button-upload');
 const resetBtn = document.getElementById('reset');
 
 let count = 0;
-addBtn.addEventListener('click', () => addToDo({date:'date', description:'description', switchOn: false}));
+addBtn.addEventListener('click', () => {
+    addToDo({date:'date', description:'description', switchOn: false});
+    sort();
+});
 saveBtn.addEventListener('click', () => {});
 closeBtn.addEventListener('click', () => closeEditor());
 downloadBtn.addEventListener('click', () => download());
@@ -130,12 +133,9 @@ function upload(){
         const toDoList = JSON.parse(event.target.result);
         reset();
         toDoList.forEach(toDo => addToDo(toDo));
+        sort();
     };
     reader.readAsText(file);
-}
-
-function displayToDoList(toDoList){
-
 }
 
 function clickHiddenBtn(btn) {
@@ -149,4 +149,19 @@ function reset(){
     }
     const toDoList = getToDoList();
     toDoList.forEach(toDo => toDo.remove());
+}
+
+function sort(){
+    let toDoList = getToDoList();
+    const n = toDoList.length;
+    for (let i = 0; i < n - 1; i++){
+        for (let j = i + 1; j < n; j++){
+            const firstDate = toDoList[i].querySelector('.date').textContent;
+            const secondDate = toDoList[j].querySelector('.date').textContent;
+            if ((secondDate === 'date' && firstDate !== 'date') ||secondDate < firstDate){
+                list.insertBefore(toDoList[j], toDoList[i]);
+                toDoList = getToDoList();
+            }
+        }
+    }
 }

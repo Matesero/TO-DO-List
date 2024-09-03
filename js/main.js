@@ -5,17 +5,19 @@ const saveBtn = document.getElementById('save');
 const closeBtn = document.getElementById('close');
 const downloadBtn = document.getElementById('download');
 const uploadBtn = document.getElementById('upload');
+const hiddenUploadBtn = document.getElementById('hidden-button-upload');
 const resetBtn = document.getElementById('reset');
 
 let count = 0;
-addBtn.addEventListener('click', () => addToDo());
+addBtn.addEventListener('click', () => addToDo({date:'date', description:'description', switchOn: false}));
 saveBtn.addEventListener('click', () => {});
 closeBtn.addEventListener('click', () => closeEditor());
 downloadBtn.addEventListener('click', () => download());
-uploadBtn.addEventListener('click', () => upload());
+uploadBtn.addEventListener('click', () => clickHiddenBtn(hiddenUploadBtn));
+hiddenUploadBtn.addEventListener('change', () => upload())
 resetBtn.addEventListener('click', () => reset());
 
-function addToDo(){
+function addToDo(data){
     count++;
     let toDo = document.createElement('div');
     toDo.classList.add('to-do');
@@ -29,7 +31,7 @@ function addToDo(){
     let date = document.createElement('p');
     date.classList.add('date');
     date.id = 'date-' + count;
-    date.textContent = 'date';
+    date.textContent = data.date;
 
     let topBarBtns = document.createElement('div');
     topBarBtns.classList.add('top-bar__buttons');
@@ -37,6 +39,9 @@ function addToDo(){
 
     let switchBtn = document.createElement('button');
     switchBtn.classList.add('switch');
+    if (data.switchOn){
+        switchBtn.classList.add('switch-on');
+    }
     switchBtn.addEventListener('click', () => switchComplete(toDo));
 
     let editBtn = document.createElement('button');
@@ -59,7 +64,7 @@ function addToDo(){
     let description = document.createElement('p');
     description.classList.add('description');
     description.id = 'description-' + count;
-    description.textContent = 'description';
+    description.textContent = data.description;
 
     toDo.appendChild(topBar);
     toDo.appendChild(description);
@@ -110,12 +115,31 @@ function download(){
     const json = JSON.stringify(toDoList);
     const blob = new Blob([json], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    const btn = document.createElement('button');
+    const btn = document.createElement('a');
     btn.setAttribute('download', "toDoList.json");
     btn.href = url;
     document.body.appendChild(btn);
     btn.click();
     document.body.removeChild(btn);
+}
+
+function upload(){
+    const file = hiddenUploadBtn.files[0];
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const toDoList = JSON.parse(event.target.result);
+        reset();
+        toDoList.forEach(toDo => addToDo(toDo));
+    };
+    reader.readAsText(file);
+}
+
+function displayToDoList(toDoList){
+
+}
+
+function clickHiddenBtn(btn) {
+    btn.click();
 }
 
 function reset(){

@@ -1,5 +1,7 @@
 let list = document.getElementById('list');
 const editor = document.getElementById('editor');
+const saveBtn = document.getElementById('save');
+const closeBtn = document.getElementById('close');
 const downloadBtn = document.getElementById('download');
 const uploadBtn = document.getElementById('upload');
 const resetBtn = document.getElementById('reset');
@@ -7,6 +9,7 @@ const addBtn = document.getElementById('add');
 
 let count = 0;
 addBtn.addEventListener('click', () => addToDo());
+closeBtn.addEventListener('click', () => closeEditor());
 
 function addToDo(){
     count++;
@@ -40,6 +43,7 @@ function addToDo(){
     let deleteBtn = document.createElement('button');
     deleteBtn.classList.add('delete');
     deleteBtn.classList.add('button-img');
+    deleteBtn.addEventListener('click', () => deleteToDo(toDo));
 
     topBarBtns.appendChild(switchBtn);
     topBarBtns.appendChild(editBtn);
@@ -65,5 +69,13 @@ function switchComplete(toDo){
 }
 
 function edit(toDo) {
-    console.log('edit');
+    editor.classList.toggle('hidden');
+}
+
+function deleteToDo(toDo){
+    toDo.remove();
+}
+
+function closeEditor(){
+    editor.classList.add('hidden');
 }

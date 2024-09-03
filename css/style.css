@@ -32,6 +32,65 @@
     flex-direction: column;
 }
 
+#editor {
+    width: 250px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.80);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 10px 10px 5px 10px;
+    align-items: center;
+    gap: 15px;
+    z-index: 1;
+}
+
+#editor__input-fields {
+    gap: 5px;
+}
+
+#input-fields__date,
+#input-fields__description {
+    justify-content: space-between;
+}
+
+.label {
+    font-family: "Poppins-SemiBold", sans-serif;
+    font-size: 12px;
+    line-height: 0;
+}
+
+#input-date,
+#input-description {
+
+}
+
+
+#editor__buttons {
+    gap: 5px;
+}
+
+#save,
+#close {
+    width: 70px;
+    height: 25px;
+    background-color: #28d779;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#close {
+    background-color: #de4a40;
+}
+
+.hidden {
+    opacity: 0;
+}
+
 #to-do-list {
     margin: 15px auto;
     align-items: center;
@@ -84,7 +143,7 @@
     width: 34px; /* ширина */
     height: 18px; /* высота */
     border-radius: 19px; /* радиус скругления */
-    background: #bfbfbf; /* цвет фона */
+    background: #ff8080; /* цвет фона */
     z-index: 0;
     margin: 0;
     padding: 0;

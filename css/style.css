@@ -76,13 +76,64 @@
 }
 
 .top-bar__buttons {
-
+    gap: 4px;
 }
 
-#edit,
-#delete {
-    width: 12px;
-    height: 12px;
+.switch {
+    display: inline-block;
+    width: 34px; /* ширина */
+    height: 18px; /* высота */
+    border-radius: 19px; /* радиус скругления */
+    background: #bfbfbf; /* цвет фона */
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition-duration: 300ms; /* анимация */
+}
+.switch::after {
+    content: "";
+    height: 14px; /* высота кнопки */
+    width: 14px; /* ширина кнопки */
+    border-radius: 17px;
+    background: #fff; /* цвет кнопки */
+    top: 2px; /* положение кнопки по вертикали относительно основы */
+    left: 2px; /* положение кнопки по горизонтали относительно основы */
+    transition-duration: 300ms; /* анимация */
+    position: absolute;
+    z-index: 1;
+}
+.switch-on {
+    background: #118c4e;
+}
+.switch-on::after {
+    left: 18px;
+}
+
+.complete {
+    background: #9fff99;
+    text-decoration: line-through;
+}
+
+.edit,
+.delete {
+    width: 18px;
+    height: 18px;
+    background-color: transparent;
+    outline: none;
+    border: 0;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.edit {
+    background-image: url("../assets/png/pen.png");
+}
+
+.delete {
+    background-image: url("../assets/png/remove.png");
 }
 
 #description {

@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>To-do list</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+<div id="editor"></div>
+<div class="column" id="to-do-list">
+    <div class="column" id="to-do-list__content">
+        <p id="list-name">To-Do list</p>
+        <div class="column" id="list">
+            <div class="to-do column" id="to-do-1">
+                <div class="to-do__top-bar row" id="to-do__top-bar-1">
+                    <p class="date" id="date-1">2024-09-03</p>
+                    <div class="top-bar__buttons row">
+                        <button id="switch"></button>
+                        <button id="edit"></button>
+                        <button id="delete"></button>
+                    </div>
+                </div>
+                <p id="description">description</p>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="bottom-bar">
+        <button id="download"></button>
+        <button id="upload"></button>
+        <button id="reset"></button>
+    </div>
+</div>
+<script type="module" src="./js/main.js"></script>
 </body>
 </html>

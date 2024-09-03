@@ -1,3 +1,7 @@
+:root{
+
+}
+
 @font-face {
     font-family: "Poppins-Medium";
     src: url("../assets/fonts/Poppins-Medium.ttf");
@@ -18,3 +22,69 @@
     src: url("../assets/fonts/Poppins-Bold.ttf");
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+#to-do-list {
+    min-height: 842px;
+    max-width: 595px;
+    margin: 15px auto;
+    background-color: #dcdcdc;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    align-items: center;
+}
+
+#to-do-list__content {
+    align-items: center;
+    gap: 5px;
+}
+
+#list-name {
+    font-family: "Poppins-Bold", sans-serif;
+    font-size: 25px;
+    line-height: 0;
+}
+
+#list {
+    gap: 5px;
+    height: fit-content;
+}
+
+.to-do {
+    width: 550px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.to-do__top-bar {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date {
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 14px;
+}
+
+.top-bar__buttons {
+
+}
+
+#edit,
+#delete {
+    width: 12px;
+    height: 12px;
+}
+
+#description {
+
+}

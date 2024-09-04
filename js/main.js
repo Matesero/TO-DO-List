@@ -20,6 +20,7 @@ const resetBtn = document.getElementById('reset');
 let toDoList = [];
 let chosenToDo = 0;
 let count = 0;
+let editing = false;
 
 addBtn.addEventListener('click', () => addNewToDo());
 saveBtn.addEventListener('click', () => save());
@@ -100,12 +101,12 @@ function switchCompleted(td, index){
 }
 
 function edit(htmlToDo, data) {
-    editor.classList.toggle('hidden');
+    editor.classList.remove('hidden');
+    editing = true;
     chosenToDo = data.index;
     console.log(editor.querySelector('#input-date').value);
     editor.querySelector('#input-date').value = data.date;
     editor.querySelector('#input-description').value = data.description;
-    document.addEventListener('click', () => closeEditor());
 }
 
 function save(){
@@ -120,9 +121,7 @@ function save(){
 }
 
 function closeEditor(){
-    console.log("124")
-    editor.classList.toggle('hidden');
-    document.removeEventListener('click', () => closeEditor());
+    editor.classList.add('hidden');
 }
 
 function deleteToDo(index){

@@ -8,7 +8,11 @@ class toDo {
 }
 
 let list = document.getElementById('list');
+const toDoListDoc = document.getElementById('to-do-list');
+const toDOListContent = document.getElementById('to-do-list__content');
+scale();
 const editor = document.getElementById('editor');
+const editorBackground = document.getElementById('editor__background');
 const addBtn = document.getElementById('add');
 const saveBtn = document.getElementById('save');
 const closeBtn = document.getElementById('close');
@@ -22,7 +26,9 @@ let chosenToDo = 0;
 let count = 0;
 let editing = false;
 
+window.addEventListener('resize', scale);
 addBtn.addEventListener('click', () => addNewToDo());
+editorBackground.addEventListener('click', () => closeEditor());
 saveBtn.addEventListener('click', () => save());
 closeBtn.addEventListener('click', () => closeEditor());
 downloadBtn.addEventListener('click', () => download());
@@ -101,8 +107,7 @@ function switchCompleted(td, index){
 }
 
 function edit(htmlToDo, data) {
-    editor.classList.remove('hidden');
-    editing = true;
+    openEditor();
     chosenToDo = data.index;
     console.log(editor.querySelector('#input-date').value);
     editor.querySelector('#input-date').value = data.date;
@@ -120,8 +125,20 @@ function save(){
     display();
 }
 
+function openEditor(){
+    editing = true;
+    toDoListDoc.classList.remove('no-blur');
+    toDoListDoc.classList.add('blur');
+    editor.querySelector('#input-description').style.height = '20px';
+    document.body.style.overflow = 'hidden';
+    editor.classList.remove('hidden');
+}
+
 function closeEditor(){
     editor.classList.add('hidden');
+    document.body.style.overflow = '';
+    toDoListDoc.classList.add('no-blur');
+    toDoListDoc.classList.remove('blur');
 }
 
 function deleteToDo(index){
@@ -193,4 +210,14 @@ function sort(){
 function display(){
     removeChildNodes('list');
     toDoList.forEach(td => createHtmlToDo(td));
+}
+
+function scale(){
+    const height = window.innerHeight;
+    const newMaxHeight = (height - 150);
+    if (toDOListContent.height > newMaxHeight) {
+        toDOListContent.style.height = (newMaxHeight + 150) + 'px';
+    }
+    toDOListContent.style.maxHeight = (height - newMaxHeight / height * 100) + 'px';
+    list.style.maxHeight = (height - (1 + newMaxHeight / height) * 100) + 'px';
 }

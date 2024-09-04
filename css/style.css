@@ -1,7 +1,3 @@
-:root{
-
-}
-
 @font-face {
     font-family: "Poppins-Medium";
     src: url("../assets/fonts/Poppins-Medium.ttf");
@@ -32,7 +28,7 @@
     flex-direction: column;
 }
 
-#editor {
+#editor__content {
     width: 300px;
     position: absolute;
     top: 50%;
@@ -42,7 +38,13 @@
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 10px 10px 5px 10px;
-    gap: 10px;
+    z-index: 2;
+}
+
+#editor__background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     z-index: 1;
 }
 
@@ -78,8 +80,10 @@
 }
 
 #editor__buttons {
-    gap: 5px;
+    justify-content: center;
     margin: 0 auto;
+    margin-top: 5px;
+    gap: 5px;
 }
 
 #save,
@@ -110,13 +114,43 @@
 }
 
 #to-do-list {
-    margin: 15px auto;
+    position: fixed;
+    left: 50%;
+    right: 50%;
+    top: 2.5%;
     align-items: center;
     gap: 10px;
 }
 
+.blur {
+    animation: blur-animation 0.5s ease-out;
+    filter: blur(2px);
+}
+
+.no-blur {
+    animation: no-blur-animation 0.5s ease-out;
+    filter: blur(0px);
+}
+
+@keyframes blur-animation {
+    from {
+        filter: blur(0px);
+    } to {
+          filter: blur(2px);
+      }
+}
+
+@keyframes no-blur-animation {
+    from {
+        filter: blur(2px);
+    } to {
+          filter: blur(0px);
+      }
+}
+
 #to-do-list__content {
     width: 580px;
+    max-height: 820px;
     background-color: #dcdcdc;
     padding: 0 10px 5px 10px;
     border-radius: 10px;
@@ -133,8 +167,18 @@
 }
 
 #list {
+    width: 580px;
+    max-height: 730px;
+    border-radius: 10px;
     gap: 7px;
+    align-items: center;
+    overflow-y: auto;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
+
 
 .to-do {
     width: 555px;
@@ -166,33 +210,36 @@
 
 .switch {
     display: inline-block;
-    width: 34px; /* ширина */
-    height: 18px; /* высота */
-    border-radius: 19px; /* радиус скругления */
-    background: #ff8080; /* цвет фона */
+    width: 34px;
+    height: 18px;
+    border-radius: 19px;
+    background: #ff8080;
     z-index: 0;
     margin: 0;
     padding: 0;
     border: none;
     cursor: pointer;
     position: relative;
-    transition-duration: 300ms; /* анимация */
+    transition-duration: 300ms;
 }
+
 .switch::after {
     content: "";
-    height: 14px; /* высота кнопки */
-    width: 14px; /* ширина кнопки */
+    height: 14px;
+    width: 14px;
     border-radius: 17px;
-    background: #fff; /* цвет кнопки */
-    top: 2px; /* положение кнопки по вертикали относительно основы */
-    left: 2px; /* положение кнопки по горизонтали относительно основы */
-    transition-duration: 300ms; /* анимация */
+    background: #ffffff;
+    top: 2px;
+    left: 2px;
+    transition-duration: 300ms;
     position: absolute;
     z-index: 1;
 }
+
 .switch-on {
     background: #118c4e;
 }
+
 .switch-on::after {
     left: 18px;
 }

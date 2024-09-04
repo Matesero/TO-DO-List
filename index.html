@@ -7,22 +7,27 @@
 </head>
 <body>
 <input type="file" class="hidden" id="hidden-button-upload" accept=".JSON">
+
 <div class="column hidden" id="editor">
-    <div class="column" id="editor__input-fields">
-        <div class="row" id="input-fields__date">
-            <p class="label">date</p>
-            <input id="input-date" type="date">
+    <div id="editor__background"></div>
+    <div id="editor__content">
+        <div class="column" id="editor__input-fields">
+            <div class="row" id="input-fields__date">
+                <p class="label">date</p>
+                <input id="input-date" type="date">
+            </div>
+            <div class="row" id="input-fields__description">
+                <p class="label">description</p>
+                <textarea id="input-description" style="resize: vertical"></textarea>
+            </div>
         </div>
-        <div class="row" id="input-fields__description">
-            <p class="label">description</p>
-            <textarea id="input-description" style="resize: vertical"></textarea>
+        <div class="row" id="editor__buttons">
+            <button id="save">save</button>
+            <button id="close">close</button>
         </div>
-    </div>
-    <div class="row" id="editor__buttons">
-        <button id="save">save</button>
-        <button id="close">close</button>
     </div>
 </div>
+
 <div class="column" id="to-do-list">
     <div class="column" id="to-do-list__content">
         <p id="list-name">To-Do list</p>

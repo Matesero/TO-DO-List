@@ -33,7 +33,7 @@
 }
 
 #editor {
-    width: 200px;
+    width: 300px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -65,7 +65,7 @@
 #input-date,
 #input-description {
     height: 20px;
-    width: 110px;
+    width: 200px;
     min-height: 20px;
     font-size: 10px;
     border: 1px solid #ddd;
@@ -73,7 +73,7 @@
 }
 
 #input-date {
-    width: 113px;
+    width: 203px;
     cursor: pointer;
 }
 
@@ -138,13 +138,14 @@
 
 .to-do {
     width: 555px;
+    height: fit-content;
     padding: 5px 10px;
     border-radius: 10px;
     background: #ffffff;
 }
 
 .to-do:hover {
-    box-shadow: 0 0 10px rgb(255, 255, 255);
+    scale: 1.005;
 }
 
 .to-do__top-bar {
@@ -196,13 +197,9 @@
     left: 18px;
 }
 
-.complete {
+.completed {
     background: #9fff99;
     text-decoration: line-through;
-}
-
-.complete:hover {
-    box-shadow: 0 0 15px rgb(159, 255, 153);
 }
 
 .button-img {
@@ -228,9 +225,11 @@
 }
 
 .description {
+    display: flex;
+    flex-wrap: wrap;
     font-family: "Poppins-Regular", sans-serif;
     font-size: 12px;
-    line-height: 12px;
+    line-height: 14px;
     padding-left: 8px;
     cursor: default;
 }

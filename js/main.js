@@ -1,3 +1,12 @@
+class toDo {
+    constructor(date, description, completed, index) {
+        this.date = date;
+        this.description = description;
+        this.completed = completed;
+        this.index = index;
+    }
+}
+
 let list = document.getElementById('list');
 const editor = document.getElementById('editor');
 const addBtn = document.getElementById('add');
@@ -8,24 +17,31 @@ const uploadBtn = document.getElementById('upload');
 const hiddenUploadBtn = document.getElementById('hidden-button-upload');
 const resetBtn = document.getElementById('reset');
 
+let toDoList = [];
+let chosenToDo = 0;
 let count = 0;
-addBtn.addEventListener('click', () => {
-    addToDo({date:'date', description:'description', switchOn: false});
-    sort();
-});
-saveBtn.addEventListener('click', () => {});
+
+addBtn.addEventListener('click', () => addNewToDo());
+saveBtn.addEventListener('click', () => save());
 closeBtn.addEventListener('click', () => closeEditor());
 downloadBtn.addEventListener('click', () => download());
 uploadBtn.addEventListener('click', () => clickHiddenBtn(hiddenUploadBtn));
 hiddenUploadBtn.addEventListener('change', () => upload())
 resetBtn.addEventListener('click', () => reset());
 
-function addToDo(data){
+function addNewToDo(){
+    let newToDo = new toDo('date', 'description', false, count);
+    toDoList.push(newToDo);
+    sort();
+    display();
     count++;
-    let toDo = document.createElement('div');
-    toDo.classList.add('to-do');
-    toDo.classList.add('column');
-    toDo.id = 'to-do-' + count;
+}
+
+function createHtmlToDo(data){
+    let htmlToDo = document.createElement('div');
+    htmlToDo.classList.add('to-do');
+    htmlToDo.classList.add('column');
+    htmlToDo.id = 'to-do-' + data.index;
 
     let topBar = document.createElement('div');
     topBar.classList.add('to-do__top-bar');
@@ -33,7 +49,7 @@ function addToDo(data){
 
     let date = document.createElement('p');
     date.classList.add('date');
-    date.id = 'date-' + count;
+    date.id = 'date-' + data.index;
     date.textContent = data.date;
 
     let topBarBtns = document.createElement('div');
@@ -42,20 +58,21 @@ function addToDo(data){
 
     let switchBtn = document.createElement('button');
     switchBtn.classList.add('switch');
-    if (data.switchOn){
+    if (data.completed){
         switchBtn.classList.add('switch-on');
+        htmlToDo.classList.add('completed');
     }
-    switchBtn.addEventListener('click', () => switchComplete(toDo));
+    switchBtn.addEventListener('click', () => switchCompleted(htmlToDo, data.index));
 
     let editBtn = document.createElement('button');
     editBtn.classList.add('edit');
     editBtn.classList.add('button-img');
-    editBtn.addEventListener('click', () => edit(toDo));
+    editBtn.addEventListener('click', () => edit(htmlToDo, data));
 
     let deleteBtn = document.createElement('button');
     deleteBtn.classList.add('delete');
     deleteBtn.classList.add('button-img');
-    deleteBtn.addEventListener('click', () => deleteToDo(toDo));
+    deleteBtn.addEventListener('click', () => deleteToDo(data.index));
 
     topBarBtns.appendChild(switchBtn);
     topBarBtns.appendChild(editBtn);
@@ -66,55 +83,55 @@ function addToDo(data){
 
     let description = document.createElement('p');
     description.classList.add('description');
-    description.id = 'description-' + count;
+    description.id = 'description-' + data.index;
     description.textContent = data.description;
+    console.log(data.description);
 
-    toDo.appendChild(topBar);
-    toDo.appendChild(description);
+    htmlToDo.appendChild(topBar);
+    htmlToDo.appendChild(description);
 
-    list.appendChild(toDo);
+    list.appendChild(htmlToDo);
 }
 
-function switchComplete(toDo){
-    toDo.querySelector('.switch').classList.toggle('switch-on')
-    toDo.classList.toggle('complete');
+function switchCompleted(td, index){
+    toDoList[index].completed = !toDoList[index].completed;
+    td.querySelector('.switch').classList.toggle('switch-on')
+    td.classList.toggle('completed');
 }
 
-function edit(toDo) {
+function edit(htmlToDo, data) {
     editor.classList.toggle('hidden');
+    chosenToDo = data.index;
+    console.log(editor.querySelector('#input-date').value);
+    editor.querySelector('#input-date').value = data.date;
+    editor.querySelector('#input-description').value = data.description;
+    document.addEventListener('click', () => closeEditor());
 }
 
-function deleteToDo(toDo){
-    toDo.remove();
+function save(){
+    closeEditor();
+    const date = editor.querySelector('#input-date').value;
+    if (date !== '') {
+        toDoList[chosenToDo].date = date;
+    }
+    toDoList[chosenToDo].description = editor.querySelector('#input-description').value;
+    sort();
+    display();
 }
 
 function closeEditor(){
-    editor.classList.add('hidden');
+    console.log("124")
+    editor.classList.toggle('hidden');
+    document.removeEventListener('click', () => closeEditor());
 }
 
-function getToDoList(){
-    return Array.from(document.getElementsByClassName('to-do'));
-}
-
-function convertElement(toDo){
-    const date = toDo.querySelector('.date').textContent;
-    const description = toDo.querySelector('.description').textContent;
-    const switchOn = toDo.querySelector('.switch').classList.contains('switch-on');
-    return {date: date, description:description, switchOn:switchOn};
-}
-
-function getConvertedToDOList(){
-    const toDoListDoc = getToDoList();
-    let toDoList = [];
-    for (let i = 0; i < toDoListDoc.length; i++){
-        const toDo = convertElement(toDoListDoc[i]);
-        toDoList.push(toDo);
-    }
-    return toDoList;
+function deleteToDo(index){
+    count--;
+    toDoList.splice(index, 1);
+    display();
 }
 
 function download(){
-    const toDoList = getConvertedToDOList();
     const json = JSON.stringify(toDoList);
     const blob = new Blob([json], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -130,10 +147,9 @@ function upload(){
     const file = hiddenUploadBtn.files[0];
     const reader = new FileReader();
     reader.onload = function(event) {
-        const toDoList = JSON.parse(event.target.result);
-        reset();
-        toDoList.forEach(toDo => addToDo(toDo));
+        toDoList = JSON.parse(event.target.result);
         sort();
+        display();
     };
     reader.readAsText(file);
 }
@@ -144,24 +160,38 @@ function clickHiddenBtn(btn) {
 
 function reset(){
     count = 0;
+    toDoList.splice(0, toDoList.length);
     if (!editor.classList.contains('hidden')){
         editor.classList.add('hidden');
     }
-    const toDoList = getToDoList();
-    toDoList.forEach(toDo => toDo.remove());
+    removeChildNodes('list');
+}
+
+function removeChildNodes(id){
+    const node = document.getElementById(id);
+    while (node.childNodes.length > 0){
+        node.removeChild(node.firstChild);
+    }
 }
 
 function sort(){
-    let toDoList = getToDoList();
     const n = toDoList.length;
     for (let i = 0; i < n - 1; i++){
         for (let j = i + 1; j < n; j++){
-            const firstDate = toDoList[i].querySelector('.date').textContent;
-            const secondDate = toDoList[j].querySelector('.date').textContent;
-            if ((secondDate === 'date' && firstDate !== 'date') ||secondDate < firstDate){
-                list.insertBefore(toDoList[j], toDoList[i]);
-                toDoList = getToDoList();
+            const firstDate = toDoList[i].date;
+            const secondDate = toDoList[j].date;
+            if ((secondDate === 'date' || secondDate < firstDate) && (firstDate !== 'date')){
+                toDoList[i].index = j;
+                toDoList[j].index = i;
+                const temp = toDoList[i];
+                toDoList[i] = toDoList[j];
+                toDoList[j] = temp;
             }
         }
     }
+}
+
+function display(){
+    removeChildNodes('list');
+    toDoList.forEach(td => createHtmlToDo(td));
 }

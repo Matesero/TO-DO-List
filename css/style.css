@@ -163,7 +163,53 @@
     font-family: "Poppins-Bold", sans-serif;
     font-size: 25px;
     line-height: 0;
+    text-align: center;
     cursor: default;
+}
+
+#sort-switch {
+    font-family: "Poppins", sans-serif; /* Используем Poppins */
+    font-weight: 600; /* Указываем вес шрифта, если это полужирный шрифт */
+    position: relative;
+    background-color: #dcdcdc;
+    padding: 0 10px 5px 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    align-items: center;
+}
+
+.switch-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.switch input {
+    display: none; /* Скрываем стандартные radio кнопки */
+}
+
+.slider {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border-radius: 25px;
+    transition: background-color 0.3s;
+}
+
+.slider:hover {
+    background-color: #bbb;
+}
+
+input:checked + .slider {
+    background-color: #4caf50;
+    color: white;
 }
 
 #list {
@@ -178,7 +224,6 @@
 ::-webkit-scrollbar {
     display: none;
 }
-
 
 .to-do {
     width: 555px;
@@ -291,13 +336,12 @@
     gap: 10px;
 }
 
-#download,
-#upload,
-#reset {
+.bottom-bar__button {
     width: fit-content;
     height: fit-content;
     position: relative;
     font-family: "Poppins-Medium", sans-serif;
+    white-space: nowrap;
     font-size: 15px;
     color: #FFFFFF;
     background: #28d779;
@@ -308,8 +352,6 @@
     box-shadow: 0 0 10px rgba(40, 215, 121, 0.65);
 }
 
-#download:hover,
-#upload:hover,
-#reset:hover {
+.bottom-bar__button:hover {
     box-shadow: 0 0 15px rgba(40, 215, 121, 100%);
 }

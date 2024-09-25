@@ -31,13 +31,27 @@
 <div class="column" id="to-do-list">
     <div class="column" id="to-do-list__content">
         <p id="list-name">To-Do list</p>
+        <div class="switch-container">
+            <label class="switch">
+                <input type="radio" name="sort" value="none" checked>
+                <span class="slider">Без сортировки</span>
+            </label>
+            <label class="switch">
+                <input type="radio" name="sort" value="asc">
+                <span class="slider">По возрастанию</span>
+            </label>
+            <label class="switch">
+                <input type="radio" name="sort" value="desc">
+                <span class="slider">По убыванию</span>
+            </label>
+        </div>
         <div class="column" id="list"></div>
         <button class="button-img" id="add"></button>
     </div>
     <div class="row" id="bottom-bar">
-        <button id="download">download</button>
-        <button id="upload">upload</button>
-        <button id="reset">reset</button>
+        <button class="bottom-bar__button" id="download">download</button>
+        <button class="bottom-bar__button" id="upload">upload</button>
+        <button class="bottom-bar__button" id="reset">reset</button>
     </div>
 </div>
 <script type="module" src="./js/main.js"></script>

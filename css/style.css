@@ -156,7 +156,13 @@
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     align-items: center;
-    gap: 5px;
+}
+
+#top {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 #list-name {
@@ -167,49 +173,21 @@
     cursor: default;
 }
 
-#sort-switch {
-    font-family: "Poppins", sans-serif; /* Используем Poppins */
-    font-weight: 600; /* Указываем вес шрифта, если это полужирный шрифт */
-    position: relative;
-    background-color: #dcdcdc;
-    padding: 0 10px 5px 10px;
+#switch-sort {
+    position: absolute; /* Абсолютное позиционирование */
+    transform: translateX(-50%);
+    left: 206px;
+    width: fit-content;
+    height: fit-content;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 15px;
+    color: #FFFFFF;
+    background: #969696;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    align-items: center;
-}
-
-.switch-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-}
-
-.switch {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 0 10px;
+    padding: 1px 8px;
     cursor: pointer;
-}
-
-.switch input {
-    display: none; /* Скрываем стандартные radio кнопки */
-}
-
-.slider {
-    padding: 10px 20px;
-    background-color: #ccc;
-    border-radius: 25px;
-    transition: background-color 0.3s;
-}
-
-.slider:hover {
-    background-color: #bbb;
-}
-
-input:checked + .slider {
-    background-color: #4caf50;
-    color: white;
+    white-space: nowrap;
+    border: none;
 }
 
 #list {
@@ -330,6 +308,7 @@ input:checked + .slider {
     width: 26px;
     height: 26px;
     background-image: url("../assets/png/add.png");
+    margin-top: 5px;
 }
 
 #bottom-bar {

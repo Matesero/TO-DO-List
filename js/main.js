@@ -27,6 +27,7 @@ const editor = document.getElementById('editor');
 const editorDate = editor.querySelector('#input-date');
 const editorDescription = editor.querySelector('#input-description');
 const editorBackground = document.getElementById('editor__background');
+const switchSortBtn = document.getElementById('switch-sort');
 const addBtn = document.getElementById('add');
 const saveBtn = document.getElementById('save');
 const closeBtn = document.getElementById('close');
@@ -44,6 +45,7 @@ window.addEventListener('resize', scale);
 document.addEventListener('DOMContentLoaded', function () {
     uploadFromDatabase();
 });
+switchSortBtn.addEventListener('click', () => switchSort());
 addBtn.addEventListener('click', () => createNewTask());
 editorBackground.addEventListener('click', () => closeEditor());
 saveBtn.addEventListener('click', () => save());
@@ -52,6 +54,24 @@ downloadBtn.addEventListener('click', () => download());
 uploadBtn.addEventListener('click', () => clickHiddenBtn(hiddenUploadBtn));
 hiddenUploadBtn.addEventListener('change', () => uploadFromFile())
 resetBtn.addEventListener('click', () => reset());
+
+function switchSort (){
+    switch (sort) {
+        case "all":
+            sort = "onlyNotCompleted";
+            switchSortBtn.textContent = "only not completed";
+            break;
+        case "onlyNotCompleted":
+            sort = "onlyCompleted";
+            switchSortBtn.textContent = "only completed";
+            break;
+        case "onlyCompleted":
+            sort = "all";
+            switchSortBtn.textContent = "all"
+            break;
+    }
+    uploadFromDatabase();
+}
 
 export function setToDoList(list) {
     toDoList = list;
